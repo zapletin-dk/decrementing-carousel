@@ -3,27 +3,25 @@ package com.epam.rd.autotasks;
 import java.util.Arrays;
 
 public class DecrementingCarousel {
-    int capacity;
+    private int filledSize;
     static int[] elements;
-    int size = 0;
-    boolean called;
+    private boolean called;
 
     public DecrementingCarousel(int capacity) {
-        this.capacity = capacity;
         elements = new int[capacity];
     }
 
     public boolean addElement(int element) {
-        if (element <= 0 || elements.length == size) {
+        if (element <= 0 || elements.length == filledSize) {
             return false;
         }
-        elements[size++] = element;
+        elements[filledSize++] = element;
         return true;
     }
 
     public CarouselRun run() {
         if (!called) {
-            elements = Arrays.copyOf(elements, size);
+            elements = Arrays.copyOf(elements, filledSize);
             called = true;
             return new CarouselRun();
         } else {
